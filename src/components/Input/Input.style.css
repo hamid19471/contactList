@@ -1,0 +1,12 @@
+.input-class{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    background-color: rgb(233, 233, 233);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
