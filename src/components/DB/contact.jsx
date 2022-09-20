@@ -1,7 +1,7 @@
 import React from 'react'
-import './Db.style.css'
+import './contact.style.css'
 import Button from '../Buttons/SubmitButton'
-const Db = ({onDelete, contactList}) => {
+const Contacts = ({onDelete, contactList}) => {
   return (
     <div>
         {contactList.map((item)=>(
@@ -19,4 +19,4 @@ const Db = ({onDelete, contactList}) => {
   )
 }
 
-export default Db
+export default Contacts

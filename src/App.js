@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import Button from "./components/Buttons/SubmitButton";
 import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
-import Db from "./components/DB/Db";
+import Contacts from "./components/DB/contact";
 
 function App() {
+    const [formData, setFormData] = useState({
+        id: 0,
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+    });
+    const inputCheker = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    };
     const [contactList, setContactList] = useState([
         {
             id: 1,
@@ -29,26 +37,46 @@ function App() {
         setContactList(contactList.filter((item) => item.id !== id));
     };
 
+    const addContact = (e) => {
+        e.preventDefault();
+        setContactList([
+            ...contactList,
+            { ...formData, id: Math.floor(Math.random() * 1000) },
+        ]);
+    };
+
     return (
         <div className="container">
             <Header title="Contact List" />
-            <Input
-                placeHolder="First Name"
-                name="first-name"
-                className="input-class"
-            />
-            <Input
-                placeHolder="Last Name"
-                name="last-name"
-                className="input-class"
-            />
-            <Input
-                placeHolder="Phone Number"
-                name="phone-number"
-                className="input-class"
-            />
-            <Button className="submit-button" title="Save Contact" />
-            <Db onDelete={deleteContact} contactList={contactList} />
+            <form onSubmit={addContact}>
+                <Input
+                    placeHolder="First Name"
+                    name="first-name"
+                    className="input-class"
+                    onChange={inputCheker}
+                    value={formData.firstName}
+                />
+                <Input
+                    placeHolder="Last Name"
+                    name="last-name"
+                    className="input-class"
+                    onChange={inputCheker}
+                    value={formData.lastName}
+                />
+                <Input
+                    placeHolder="Phone Number"
+                    name="phone-number"
+                    className="input-class"
+                    onChange={inputCheker}
+                    value={formData.phoneNumber}
+                />
+                <input
+                    className="submit-button"
+                    type={"submit"}
+                    value={"Save Contact"}
+                />
+            </form>
+            <Contacts onDelete={deleteContact} contactList={contactList} />
         </div>
     );
 }
